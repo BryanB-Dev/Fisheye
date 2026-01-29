@@ -1,65 +1,49 @@
 import Image from "next/image";
+import Link from "next/link";
 import styles from "./page.module.css";
+import { getAllPhotographers } from "./lib/prisma-db";
 
-export default function Home() {
+export default async function Home() {
+  const photographers = await getAllPhotographers();
+
   return (
     <div className={styles.page}>
+      <header className={styles.header}>
+        <div className={styles.brand}>
+          <span className={styles.brandText}>FishEye</span>
+        </div>
+        <h1 className={styles.title}>Nos photographes</h1>
+      </header>
+
       <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+        <section className={styles.grid} aria-label="Liste des photographes">
+          {photographers.map((photographer) => (
+            <article key={photographer.id} className={styles.card}>
+              <Link
+                className={styles.cardLink}
+                href={`/photographer/${photographer.id}`}
+                aria-label={`Voir le profil de ${photographer.name}`}
+              >
+                <div className={styles.avatarWrapper}>
+                  <Image
+                    src={`/${photographer.portrait}`}
+                    alt={photographer.name}
+                    width={200}
+                    height={200}
+                    className={styles.avatar}
+                    priority={photographer.id === photographers[0]?.id}
+                  />
+                </div>
+                <h2 className={styles.name}>{photographer.name}</h2>
+              </Link>
+              <p className={styles.location}>
+                {photographer.city}, {photographer.country}
+              </p>
+              <p className={styles.tagline}>{photographer.tagline}</p>
+              <p className={styles.price}>{photographer.price}€/jour</p>
+            </article>
+          ))}
+        </section>
       </main>
     </div>
   );
