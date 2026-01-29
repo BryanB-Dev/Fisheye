@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 import ContactModalTrigger from "./ContactModalTrigger";
-import MediaCard from "./MediaCard";
+import PhotographerContent from "./PhotographerContent";
 import StatsBar from "./StatsBar";
 import { LikesProvider } from "./LikesContext";
 import {
@@ -59,25 +59,7 @@ export default async function PhotographerPage({ params }) {
             </div>
           </section>
 
-          <section className={styles.sortBar} aria-label="Tri des médias">
-            <span className={styles.sortLabel}>Trier par</span>
-            <button type="button" className={styles.sortButton}>
-              Popularité
-            </button>
-          </section>
-
-          <section className={styles.mediaSection} aria-label="Galerie">
-            <div className={styles.mediaGrid}>
-              {medias.map((media, index) => (
-                <MediaCard 
-                  key={media.id}
-                  media={media}
-                  mediaList={medias}
-                  mediaIndex={index}
-                />
-              ))}
-            </div>
-          </section>
+          <PhotographerContent medias={medias} />
         </main>
 
         <StatsBar price={photographer.price} />

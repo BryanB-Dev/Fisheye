@@ -85,22 +85,27 @@
 }
 
 .mediaSection {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
+  width: 100%;
 }
 
 .sortBar {
   display: flex;
   align-items: center;
-  gap: 16px;
-  margin: 16px 0 32px;
+  gap: 36px;
+  margin: 0 0 40px 0;
 }
 
 .sortLabel {
+  font-family: 'DM Sans';
   font-size: 18px;
   font-weight: 700;
   color: #000000;
+  line-height: 23px;
+}
+
+.sortDropdown {
+  position: relative;
+  display: inline-block;
 }
 
 .sortButton {
@@ -109,11 +114,76 @@
   border: none;
   border-radius: 5px;
   padding: 18px 22px;
+  font-family: 'DM Sans';
   font-size: 18px;
   font-weight: 700;
   cursor: pointer;
   width: 170px;
+  height: 69px;
   text-align: left;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.sortButton:hover {
+  background: #7a1515;
+}
+
+.sortButton:focus {
+  outline: 2px solid #901c1c;
+  outline-offset: 2px;
+}
+
+.sortMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #901c1c;
+  border-radius: 5px;
+  list-style: none;
+  margin: 8px 0 0 0;
+  padding: 0;
+  width: 170px;
+  z-index: 10;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.sortMenuItem {
+  display: block;
+  width: 100%;
+  padding: 18px 20px;
+  border: none;
+  background: #901c1c;
+  color: #ffffff;
+  font-family: 'DM Sans';
+  font-size: 18px;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.sortMenuItem:last-child {
+  border-bottom: none;
+}
+
+.sortMenuItem:hover,
+.sortMenuItemActive {
+  background: #a42121;
+}
+
+.sortMenuItemSelected {
+  background: #901c1c;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.sortMenuItem:focus {
+  outline: none;
+  background: #a42121;
 }
 
 .mediaGrid {
