@@ -3,7 +3,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 import ContactModalTrigger from "./ContactModalTrigger";
-import LightboxTrigger from "./LightboxTrigger";
+import MediaCard from "./MediaCard";
+import StatsBar from "./StatsBar";
+import { LikesProvider } from "./LikesContext";
 import {
   getAllMediasForPhotographer,
   getPhotographer,
@@ -27,93 +29,59 @@ export default async function PhotographerPage({ params }) {
   const totalLikes = medias.reduce((sum, media) => sum + media.likes, 0);
 
   return (
-    <div className={styles.page}>
-      <header className={styles.header}>
-        <Link href="/" className={styles.brand} aria-label="Retour à l'accueil">
-          FishEye
-        </Link>
-      </header>
+    <LikesProvider initialTotalLikes={totalLikes}>
+      <div className={styles.page}>
+        <header className={styles.header}>
+          <Link href="/" className={styles.brand} aria-label="Retour à l'accueil">
+            FishEye
+          </Link>
+        </header>
 
-      <main className={styles.main}>
-        <section className={styles.profile} aria-label="Profil photographe">
-          <div className={styles.profileInfo}>
-            <h1 className={styles.name}>{photographer.name}</h1>
-            <p className={styles.location}>
-              {photographer.city}, {photographer.country}
-            </p>
-            <p className={styles.tagline}>{photographer.tagline}</p>
-          </div>
-          <ContactModalTrigger photographerName={photographer.name} />
-          <div className={styles.avatarWrapper}>
-            <Image
-              src={`/${photographer.portrait}`}
-              alt={photographer.name}
-              width={200}
-              height={200}
-              className={styles.avatar}
-              priority
-            />
-          </div>
-        </section>
+        <main className={styles.main}>
+          <section className={styles.profile} aria-label="Profil photographe">
+            <div className={styles.profileInfo}>
+              <h1 className={styles.name}>{photographer.name}</h1>
+              <p className={styles.location}>
+                {photographer.city}, {photographer.country}
+              </p>
+              <p className={styles.tagline}>{photographer.tagline}</p>
+            </div>
+            <ContactModalTrigger photographerName={photographer.name} />
+            <div className={styles.avatarWrapper}>
+              <Image
+                src={`/${photographer.portrait}`}
+                alt={photographer.name}
+                width={200}
+                height={200}
+                className={styles.avatar}
+                priority
+              />
+            </div>
+          </section>
 
-        <section className={styles.sortBar} aria-label="Tri des médias">
-          <span className={styles.sortLabel}>Trier par</span>
-          <button type="button" className={styles.sortButton}>
-            Popularité
-          </button>
-        </section>
+          <section className={styles.sortBar} aria-label="Tri des médias">
+            <span className={styles.sortLabel}>Trier par</span>
+            <button type="button" className={styles.sortButton}>
+              Popularité
+            </button>
+          </section>
 
-        <section className={styles.mediaSection} aria-label="Galerie">
-          <div className={styles.mediaGrid}>
-            {medias.map((media, index) => (
-              <LightboxTrigger
-                key={media.id}
-                mediaList={medias}
-                mediaIndex={index}
-              >
-                <article className={styles.mediaCard}>
-                  <div className={styles.mediaThumb}>
-                    {media.image ? (
-                      <Image
-                        src={`/${media.image}`}
-                        alt={media.title}
-                        width={350}
-                        height={300}
-                        className={styles.mediaImage}
-                      />
-                    ) : (
-                      <video
-                        className={styles.mediaVideo}
-                        muted
-                        playsInline
-                        aria-label={media.title}
-                      >
-                        <source src={`/${media.video}`} />
-                      </video>
-                    )}
-                  </div>
-                  <div className={styles.mediaMeta}>
-                    <h2 className={styles.mediaTitle}>{media.title}</h2>
-                    <span className={styles.mediaLikes} aria-label={`${media.likes} likes`}>
-                      {media.likes}
-                      <span aria-hidden="true" className={styles.heart}>
-                        ♥
-                      </span>
-                    </span>
-                  </div>
-                </article>
-              </LightboxTrigger>
-            ))}
-          </div>
-        </section>
-      </main>
+          <section className={styles.mediaSection} aria-label="Galerie">
+            <div className={styles.mediaGrid}>
+              {medias.map((media, index) => (
+                <MediaCard 
+                  key={media.id}
+                  media={media}
+                  mediaList={medias}
+                  mediaIndex={index}
+                />
+              ))}
+            </div>
+          </section>
+        </main>
 
-      <aside className={styles.stats} aria-label="Statistiques photographe">
-        <span className={styles.statsLikes}>
-          {totalLikes} ♥
-        </span>
-        <span className={styles.statsPrice}>{photographer.price}€ / jour</span>
-      </aside>
-    </div>
+        <StatsBar price={photographer.price} />
+      </div>
+    </LikesProvider>
   );
 }

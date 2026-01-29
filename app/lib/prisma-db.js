@@ -32,3 +32,18 @@ export const updateNumberOfLikes = (mediaId, newNumberOfLikes) =>
     where: { id: mediaId },
     data: { likes: newNumberOfLikes },
   });
+
+export const incrementMediaLike = async (mediaId) => {
+  const media = await prismaClient.media.findUnique({
+    where: { id: mediaId },
+  });
+
+  if (!media) {
+    throw new Error(`Media with id ${mediaId} not found`);
+  }
+
+  return prismaClient.media.update({
+    where: { id: mediaId },
+    data: { likes: media.likes + 1 },
+  });
+};
