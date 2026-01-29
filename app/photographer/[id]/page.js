@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
+import ContactModalTrigger from "./ContactModalTrigger";
 import {
   getAllMediasForPhotographer,
   getPhotographer,
@@ -41,9 +42,7 @@ export default async function PhotographerPage({ params }) {
             </p>
             <p className={styles.tagline}>{photographer.tagline}</p>
           </div>
-          <button type="button" className={styles.contactButton}>
-            Contactez-moi
-          </button>
+          <ContactModalTrigger photographerName={photographer.name} />
           <div className={styles.avatarWrapper}>
             <Image
               src={`/${photographer.portrait}`}
