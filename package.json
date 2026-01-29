@@ -1,6 +1,10 @@
 {
   "name": "fisheye",
   "version": "0.1.0",
+  "type": "module",
+  "prisma": {
+    "seed": "tsx prisma/seed.js"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -9,12 +13,17 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@prisma/adapter-better-sqlite3": "^7.3.0",
+    "@prisma/client": "^7.3.0",
+    "better-sqlite3": "^12.6.2",
     "next": "16.1.6",
     "react": "19.2.3",
     "react-dom": "19.2.3"
   },
   "devDependencies": {
     "eslint": "^9",
-    "eslint-config-next": "16.1.6"
+    "eslint-config-next": "16.1.6",
+    "prisma": "^7.3.0",
+    "tsx": "^4.21.0"
   }
 }
