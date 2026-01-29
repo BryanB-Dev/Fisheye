@@ -62,8 +62,8 @@ export default function LightboxModal({ mediaList, initialIndex = 0, onClose }) 
             <Image
               src={`/${currentMedia.image}`}
               alt={currentMedia.title}
-              fill
-              sizes="(max-width: 1440px) 90vw, 1000px"
+              width={1000}
+              height={800}
               className={styles.lightboxImage}
               priority
             />
