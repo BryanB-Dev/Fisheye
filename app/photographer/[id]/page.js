@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
 import ContactModalTrigger from "./ContactModalTrigger";
+import LightboxTrigger from "./LightboxTrigger";
 import {
   getAllMediasForPhotographer,
   getPhotographer,
@@ -64,38 +65,44 @@ export default async function PhotographerPage({ params }) {
 
         <section className={styles.mediaSection} aria-label="Galerie">
           <div className={styles.mediaGrid}>
-            {medias.map((media) => (
-              <article key={media.id} className={styles.mediaCard}>
-                <div className={styles.mediaThumb}>
-                  {media.image ? (
-                    <Image
-                      src={`/${media.image}`}
-                      alt={media.title}
-                      width={350}
-                      height={300}
-                      className={styles.mediaImage}
-                    />
-                  ) : (
-                    <video
-                      className={styles.mediaVideo}
-                      muted
-                      playsInline
-                      aria-label={media.title}
-                    >
-                      <source src={`/${media.video}`} />
-                    </video>
-                  )}
-                </div>
-                <div className={styles.mediaMeta}>
-                  <h2 className={styles.mediaTitle}>{media.title}</h2>
-                  <span className={styles.mediaLikes} aria-label={`${media.likes} likes`}>
-                    {media.likes}
-                    <span aria-hidden="true" className={styles.heart}>
-                      ♥
+            {medias.map((media, index) => (
+              <LightboxTrigger
+                key={media.id}
+                mediaList={medias}
+                mediaIndex={index}
+              >
+                <article className={styles.mediaCard}>
+                  <div className={styles.mediaThumb}>
+                    {media.image ? (
+                      <Image
+                        src={`/${media.image}`}
+                        alt={media.title}
+                        width={350}
+                        height={300}
+                        className={styles.mediaImage}
+                      />
+                    ) : (
+                      <video
+                        className={styles.mediaVideo}
+                        muted
+                        playsInline
+                        aria-label={media.title}
+                      >
+                        <source src={`/${media.video}`} />
+                      </video>
+                    )}
+                  </div>
+                  <div className={styles.mediaMeta}>
+                    <h2 className={styles.mediaTitle}>{media.title}</h2>
+                    <span className={styles.mediaLikes} aria-label={`${media.likes} likes`}>
+                      {media.likes}
+                      <span aria-hidden="true" className={styles.heart}>
+                        ♥
+                      </span>
                     </span>
-                  </span>
-                </div>
-              </article>
+                  </div>
+                </article>
+              </LightboxTrigger>
             ))}
           </div>
         </section>
