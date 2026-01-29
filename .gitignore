@@ -43,3 +43,6 @@ next-env.d.ts
 /app/generated/prisma
 # assets (already copied to public/)
 /assets
+
+# database
+*.db
