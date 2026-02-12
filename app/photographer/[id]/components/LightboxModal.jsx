@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import styles from "./page.module.css";
+import styles from "../page.module.css";
 
 export default function LightboxModal({ mediaList, initialIndex = 0, onClose }) {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
@@ -39,8 +39,6 @@ export default function LightboxModal({ mediaList, initialIndex = 0, onClose }) 
     setCurrentIndex((prev) => (prev + 1) % totalMedia);
   };
 
-  const displayIndex = currentIndex + 1;
-
   return (
     <div
       className={styles.lightboxOverlay}
@@ -51,7 +49,7 @@ export default function LightboxModal({ mediaList, initialIndex = 0, onClose }) 
         className={styles.lightbox}
         role="dialog"
         aria-modal="true"
-        aria-label="Aperçu du média"
+        aria-label="image closeup view"
         onClick={(event) => event.stopPropagation()}
         ref={dialogRef}
         tabIndex={-1}
@@ -83,7 +81,7 @@ export default function LightboxModal({ mediaList, initialIndex = 0, onClose }) 
           type="button"
           className={styles.lightboxClose}
           onClick={onClose}
-          aria-label="Fermer la lightbox"
+          aria-label="Close dialog"
         >
           ×
         </button>
@@ -93,7 +91,7 @@ export default function LightboxModal({ mediaList, initialIndex = 0, onClose }) 
           type="button"
           className={styles.lightboxPrev}
           onClick={handlePrevious}
-          aria-label="Média précédent"
+          aria-label="Previous image"
         >
           <span className={styles.lightboxArrow}>‹</span>
         </button>
@@ -103,7 +101,7 @@ export default function LightboxModal({ mediaList, initialIndex = 0, onClose }) 
           type="button"
           className={styles.lightboxNext}
           onClick={handleNext}
-          aria-label="Média suivant"
+          aria-label="Next image"
         >
           <span className={styles.lightboxArrow}>›</span>
         </button>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import styles from "./page.module.css";
+import styles from "../page.module.css";
 
 const SORT_OPTIONS = [
   { label: "Popularité", value: "popularity" },
@@ -16,7 +16,8 @@ export default function SortBar({ medias, onSortChange }) {
   const menuRef = useRef(null);
   const buttonRef = useRef(null);
   const listboxId = "sort-media-options";
-  const labelId = "sort-media-label";
+  const labelId = "order-by-label";
+  const visibleOptions = SORT_OPTIONS.filter((opt) => opt.value !== selectedSort);
 
   // Sort medias based on selection
   const getSortedMedias = (sortType) => {
@@ -41,6 +42,7 @@ export default function SortBar({ medias, onSortChange }) {
     const sorted = getSortedMedias(sortValue);
     onSortChange(sorted);
     setIsOpen(false);
+    setActiveIndex(0);
   };
 
   // Keyboard navigation
@@ -57,17 +59,17 @@ export default function SortBar({ medias, onSortChange }) {
     switch (e.key) {
       case "ArrowDown":
         e.preventDefault();
-        setActiveIndex((prev) => (prev + 1) % SORT_OPTIONS.length);
+        setActiveIndex((prev) => (prev + 1) % visibleOptions.length);
         break;
       case "ArrowUp":
         e.preventDefault();
         setActiveIndex(
-          (prev) => (prev - 1 + SORT_OPTIONS.length) % SORT_OPTIONS.length
+          (prev) => (prev - 1 + visibleOptions.length) % visibleOptions.length
         );
         break;
       case "Enter":
         e.preventDefault();
-        handleSortChange(SORT_OPTIONS[activeIndex].value);
+        handleSortChange(visibleOptions[activeIndex].value);
         break;
       case "Escape":
         e.preventDefault();
@@ -91,6 +93,12 @@ export default function SortBar({ medias, onSortChange }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  useEffect(() => {
+    if (activeIndex >= visibleOptions.length) {
+      setActiveIndex(0);
+    }
+  }, [activeIndex, visibleOptions.length]);
+
   const selectedLabel = SORT_OPTIONS.find(
     (opt) => opt.value === selectedSort
   )?.label;
@@ -102,15 +110,20 @@ export default function SortBar({ medias, onSortChange }) {
         <button
           ref={buttonRef}
           type="button"
-          className={styles.sortButton}
+          className={`${styles.sortButton} ${isOpen ? styles.sortButtonOpen : ""}`}
           onClick={() => setIsOpen(!isOpen)}
           onKeyDown={handleKeyDown}
           aria-haspopup="listbox"
           aria-expanded={isOpen}
-          aria-labelledby={labelId}
+          aria-label="Order by"
           aria-controls={listboxId}
+          aria-activedescendant={isOpen ? `sort-option-${visibleOptions[activeIndex]?.value}` : undefined}
         >
-          {selectedLabel}
+          <span className={styles.sortButtonLabel}>{selectedLabel}</span>
+          <span
+            className={`${styles.sortChevron} ${isOpen ? styles.sortChevronOpen : ""}`}
+            aria-hidden="true"
+          />
         </button>
 
         {isOpen && (
@@ -118,9 +131,9 @@ export default function SortBar({ medias, onSortChange }) {
             id={listboxId}
             className={styles.sortMenu}
             role="listbox"
-            aria-label="Options de tri"
+            aria-labelledby={labelId}
           >
-            {SORT_OPTIONS.map((option, index) => (
+            {visibleOptions.map((option, index) => (
               <li key={option.value} role="none">
                 <button
                   type="button"
@@ -128,12 +141,10 @@ export default function SortBar({ medias, onSortChange }) {
                   id={`sort-option-${option.value}`}
                   className={`${styles.sortMenuItem} ${
                     index === activeIndex ? styles.sortMenuItemActive : ""
-                  } ${
-                    option.value === selectedSort ? styles.sortMenuItemSelected : ""
                   }`}
                   onClick={() => handleSortChange(option.value)}
                   onKeyDown={handleKeyDown}
-                  aria-selected={option.value === selectedSort}
+                  aria-selected={false}
                   tabIndex={index === activeIndex ? 0 : -1}
                 >
                   {option.label}

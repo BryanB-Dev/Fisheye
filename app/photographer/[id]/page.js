@@ -2,10 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
-import ContactModalTrigger from "./ContactModalTrigger";
-import PhotographerContent from "./PhotographerContent";
-import StatsBar from "./StatsBar";
-import { LikesProvider } from "./LikesContext";
+import ContactModalTrigger from "./components/ContactModalTrigger";
+import PhotographerContent from "./components/PhotographerContent";
+import StatsBar from "./components/StatsBar";
+import { LikesProvider } from "./components/LikesContext";
 import {
   getAllMediasForPhotographer,
   getPhotographer,

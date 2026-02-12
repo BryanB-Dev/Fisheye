@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./page.module.css";
+import styles from "../page.module.css";
 import { useLikesContext } from "./LikesContext";
 
 export default function StatsBar({ price }) {

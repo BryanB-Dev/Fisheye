@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import styles from "./page.module.css";
+import styles from "../page.module.css";
 import ContactModal from "./ContactModal";
 
 export default function ContactModalTrigger({ photographerName }) {
@@ -13,6 +13,7 @@ export default function ContactModalTrigger({ photographerName }) {
         type="button"
         className={styles.contactButton}
         onClick={() => setIsOpen(true)}
+        aria-label="Contact Me"
       >
         Contactez-moi
       </button>

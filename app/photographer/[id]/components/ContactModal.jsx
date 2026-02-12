@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import styles from "./page.module.css";
+import styles from "../page.module.css";
 
 export default function ContactModal({ photographerName, isOpen, onClose }) {
   const dialogRef = useRef(null);
@@ -45,6 +45,7 @@ export default function ContactModal({ photographerName, isOpen, onClose }) {
         </button>
         <h1 id="contact-modal-title" className={styles.modalTitle}>
           Contactez-moi
+          {" "}
           <span className={styles.modalName}>{photographerName}</span>
         </h1>
         <form

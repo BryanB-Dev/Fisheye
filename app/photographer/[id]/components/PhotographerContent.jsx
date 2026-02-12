@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import styles from "./page.module.css";
+import styles from "../page.module.css";
 import SortBar from "./SortBar";
 import MediaCard from "./MediaCard";
 
 export default function PhotographerContent({ medias }) {
-  const [sortedMedias, setSortedMedias] = useState(medias);
+  const [sortedMedias, setSortedMedias] = useState(() =>
+    [...medias].sort((a, b) => b.likes - a.likes)
+  );
 
   const handleSortChange = (newSortedMedias) => {
     setSortedMedias(newSortedMedias);

@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import styles from "./page.module.css";
-import LikeButton from "../../components/LikeButton";
+import styles from "../page.module.css";
+import LikeButton from "../../../components/LikeButton";
 import LightboxTrigger from "./LightboxTrigger";
 
 export default function MediaCard({ media, mediaList, mediaIndex }) {
@@ -11,7 +11,7 @@ export default function MediaCard({ media, mediaList, mediaIndex }) {
       <LightboxTrigger
         mediaList={mediaList}
         mediaIndex={mediaIndex}
-        ariaLabel={`Ouvrir ${media.title} en lightbox`}
+        ariaLabel={`${media.title}, closeup view`}
       >
         <div className={styles.mediaThumb}>
           {media.image ? (

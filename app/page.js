@@ -9,9 +9,9 @@ export default async function Home() {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <div className={styles.brand}>
+        <Link href="/" className={styles.brand} aria-label="Fisheye Home page">
           <span className={styles.brandText}>FishEye</span>
-        </div>
+        </Link>
         <h1 className={styles.title}>Nos photographes</h1>
       </header>
 
@@ -19,15 +19,11 @@ export default async function Home() {
         <section className={styles.grid} aria-label="Liste des photographes">
           {photographers.map((photographer) => (
             <article key={photographer.id} className={styles.card}>
-              <Link
-                className={styles.cardLink}
-                href={`/photographer/${photographer.id}`}
-                aria-label={`Voir le profil de ${photographer.name}`}
-              >
+              <Link className={styles.cardLink} href={`/photographer/${photographer.id}`}>
                 <div className={styles.avatarWrapper}>
                   <Image
                     src={`/${photographer.portrait}`}
-                    alt={photographer.name}
+                    alt=""
                     width={200}
                     height={200}
                     className={styles.avatar}

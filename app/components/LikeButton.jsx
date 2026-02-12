@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useLikesContext } from "../photographer/[id]/LikesContext";
+import { useLikesContext } from "../photographer/[id]/components/LikesContext";
 import styles from "../photographer/[id]/page.module.css";
 
 export default function LikeButton({ mediaId, initialLikes }) {
@@ -44,7 +44,7 @@ export default function LikeButton({ mediaId, initialLikes }) {
       aria-label={`Like this media, ${likes} likes`}
     >
       <span className={styles.likeCount}>{likes}</span>
-      <span className={styles.likeHeart} aria-hidden="true">
+      <span className={styles.likeHeart} aria-label="likes">
         ♥
       </span>
     </button>
