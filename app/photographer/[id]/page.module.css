@@ -4,6 +4,9 @@
   color: #1d1d1d;
   font-family: var(--font-dm-sans), Arial, sans-serif;
   position: relative;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .header {

@@ -5,6 +5,9 @@
   display: flex;
   flex-direction: column;
   font-family: var(--font-dm-sans), Arial, sans-serif;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .header {
@@ -39,7 +42,7 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 48px 120px;
   justify-items: center;
 }
@@ -50,7 +53,7 @@
   align-items: center;
   text-align: center;
   gap: 4px;
-  width: 200px;
+  width: 280px;
 }
 
 .cardLink {
@@ -79,6 +82,7 @@
   font-size: 36px;
   font-weight: 400;
   color: #d3573c;
+  white-space: nowrap;
 }
 
 .location {
@@ -107,6 +111,7 @@
   }
 
   .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 32px 48px;
   }
 }
@@ -115,5 +120,9 @@
   .header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
   }
 }
