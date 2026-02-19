@@ -45,12 +45,16 @@ export default function SortBar({ medias, onSortChange }) {
     setActiveIndex(0);
   };
 
+  const openMenu = () => {
+    setIsOpen(true);
+    setActiveIndex(0);
+  };
+
   // Keyboard navigation
   const handleKeyDown = (e) => {
     if (!isOpen && (e.key === "Enter" || e.key === " ")) {
       e.preventDefault();
-      setIsOpen(true);
-      setActiveIndex(0);
+      openMenu();
       return;
     }
 
@@ -93,12 +97,6 @@ export default function SortBar({ medias, onSortChange }) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  useEffect(() => {
-    if (activeIndex >= visibleOptions.length) {
-      setActiveIndex(0);
-    }
-  }, [activeIndex, visibleOptions.length]);
-
   const selectedLabel = SORT_OPTIONS.find(
     (opt) => opt.value === selectedSort
   )?.label;
@@ -111,13 +109,18 @@ export default function SortBar({ medias, onSortChange }) {
           ref={buttonRef}
           type="button"
           className={`${styles.sortButton} ${isOpen ? styles.sortButtonOpen : ""}`}
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() => {
+            if (isOpen) {
+              setIsOpen(false);
+              return;
+            }
+            openMenu();
+          }}
           onKeyDown={handleKeyDown}
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           aria-label="Order by"
           aria-controls={listboxId}
-          aria-activedescendant={isOpen ? `sort-option-${visibleOptions[activeIndex]?.value}` : undefined}
         >
           <span className={styles.sortButtonLabel}>{selectedLabel}</span>
           <span
