@@ -6,6 +6,7 @@ export default function SiteHeader({
   brandClassName,
   logoClassName,
   homeAriaLabel,
+  logoAlt,
   rightContent = null,
 }) {
   return (
@@ -13,7 +14,7 @@ export default function SiteHeader({
       <Link href="/" className={brandClassName} aria-label={homeAriaLabel}>
         <Image
           src="/fisheye-logo.svg"
-          alt=""
+          alt={logoAlt}
           width={200}
           height={50}
           className={logoClassName}

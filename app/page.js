@@ -14,6 +14,7 @@ export default async function Home() {
         brandClassName={styles.brand}
         logoClassName={styles.brandLogo}
         homeAriaLabel="Fisheye Home page"
+        logoAlt="Fisheye Home page"
         rightContent={<h1 className={styles.title}>Nos photographes</h1>}
       />
 

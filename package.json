@@ -10,7 +10,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy:vercel": "npx vercel",
+    "deploy:vercel:prod": "npx vercel --prod"
   },
   "dependencies": {
     "@prisma/adapter-better-sqlite3": "^7.3.0",

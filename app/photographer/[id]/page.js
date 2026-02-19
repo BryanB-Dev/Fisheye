@@ -37,6 +37,7 @@ export default async function PhotographerPage({ params }) {
           brandClassName={styles.brand}
           logoClassName={styles.brandLogo}
           homeAriaLabel="Retour à l'accueil"
+          logoAlt="Fisheye Home page"
         />
 
         <main className={styles.main}>
