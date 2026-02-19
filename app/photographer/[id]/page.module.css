@@ -504,12 +504,21 @@
 .lightboxImageContainer {
   position: relative;
   width: 100%;
-  height: 100%;
+  height: calc(100% - 110px);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px 60px;
+  padding: 40px 80px 20px;
   box-sizing: border-box;
+}
+
+.lightboxMediaFrame {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .lightboxImage {
@@ -529,13 +538,11 @@
   position: absolute;
   right: 30px;
   top: 20px;
-  width: 40px;
-  height: 40px;
-  background: #911c1c;
+  width: 42px;
+  height: 42px;
+  background: transparent;
   border: none;
-  border-radius: 50%;
-  color: #ffffff;
-  font-size: 28px;
+  color: #911c1c;
   cursor: pointer;
   z-index: 10;
   display: flex;
@@ -546,7 +553,13 @@
 }
 
 .lightboxClose:hover {
-  background: #701818;
+  color: #701818;
+}
+
+.lightboxCloseIcon {
+  width: 42px;
+  height: 42px;
+  display: block;
 }
 
 /* Previous Button - Left */
@@ -555,8 +568,8 @@
   left: 20px;
   top: 50%;
   transform: translateY(-50%);
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 48px;
   background: transparent;
   border: none;
   color: #911c1c;
@@ -565,11 +578,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
   padding: 0;
 }
 
-.lightboxPrev:hover .lightboxArrow {
+.lightboxPrev:hover {
   color: #701818;
 }
 
@@ -579,8 +591,8 @@
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 48px;
   background: transparent;
   border: none;
   color: #911c1c;
@@ -589,20 +601,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
   padding: 0;
 }
 
-.lightboxNext:hover .lightboxArrow {
+.lightboxNext:hover {
   color: #701818;
 }
 
-.lightboxArrow {
+.lightboxArrowIcon {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 300;
-  line-height: 1;
+  width: 30px;
+  height: 48px;
 }
 
 /* Media Title - Bottom Left */

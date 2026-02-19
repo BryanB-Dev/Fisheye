@@ -56,24 +56,26 @@ export default function LightboxModal({ mediaList, initialIndex = 0, onClose }) 
       >
         {/* Media Display */}
         <div className={styles.lightboxImageContainer}>
-          {currentMedia.image && (
-            <Image
-              src={`/${currentMedia.image}`}
-              alt={currentMedia.title}
-              width={1000}
-              height={800}
-              className={styles.lightboxImage}
-              priority
-            />
-          )}
-          {currentMedia.video && (
-            <video
-              src={`/${currentMedia.video}`}
-              controls
-              className={styles.lightboxVideo}
-              aria-label={currentMedia.title}
-            />
-          )}
+          <div className={styles.lightboxMediaFrame}>
+            {currentMedia.image && (
+              <Image
+                src={`/${currentMedia.image}`}
+                alt={currentMedia.title}
+                width={1000}
+                height={800}
+                className={styles.lightboxImage}
+                priority
+              />
+            )}
+            {currentMedia.video && (
+              <video
+                src={`/${currentMedia.video}`}
+                controls
+                className={styles.lightboxVideo}
+                aria-label={currentMedia.title}
+              />
+            )}
+          </div>
         </div>
 
         {/* Close Button */}
@@ -83,7 +85,9 @@ export default function LightboxModal({ mediaList, initialIndex = 0, onClose }) 
           onClick={onClose}
           aria-label="Close dialog"
         >
-          ×
+          <svg className={styles.lightboxCloseIcon} width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z" fill="currentColor"/>
+          </svg>
         </button>
 
         {/* Previous Button */}
@@ -93,7 +97,9 @@ export default function LightboxModal({ mediaList, initialIndex = 0, onClose }) 
           onClick={handlePrevious}
           aria-label="Previous image"
         >
-          <span className={styles.lightboxArrow}>‹</span>
+          <svg className={styles.lightboxArrowIcon} width="30" height="48" viewBox="0 0 30 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path d="M29.6399 42.36L11.3199 24L29.6399 5.64L23.9999 -2.46532e-07L-0.000107861 24L23.9999 48L29.6399 42.36Z" fill="currentColor"/>
+          </svg>
         </button>
 
         {/* Next Button */}
@@ -103,7 +109,9 @@ export default function LightboxModal({ mediaList, initialIndex = 0, onClose }) 
           onClick={handleNext}
           aria-label="Next image"
         >
-          <span className={styles.lightboxArrow}>›</span>
+          <svg className={styles.lightboxArrowIcon} width="30" height="48" viewBox="0 0 30 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path d="M5.05138e-07 5.64L18.32 24L6.72563e-08 42.36L5.64 48L29.64 24L5.64 3.88195e-06L5.05138e-07 5.64Z" fill="currentColor"/>
+          </svg>
         </button>
 
         {/* Media Title - Bottom Left */}
