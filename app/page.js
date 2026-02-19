@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import SiteHeader from "./components/SiteHeader";
 import styles from "./page.module.css";
 import { getAllPhotographers } from "./lib/prisma-db";
 
@@ -8,12 +9,13 @@ export default async function Home() {
 
   return (
     <div className={styles.page}>
-      <header className={styles.header}>
-        <Link href="/" className={styles.brand} aria-label="Fisheye Home page">
-          <span className={styles.brandText}>FishEye</span>
-        </Link>
-        <h1 className={styles.title}>Nos photographes</h1>
-      </header>
+      <SiteHeader
+        className={styles.header}
+        brandClassName={styles.brand}
+        logoClassName={styles.brandLogo}
+        homeAriaLabel="Fisheye Home page"
+        rightContent={<h1 className={styles.title}>Nos photographes</h1>}
+      />
 
       <main className={styles.main}>
         <section className={styles.grid} aria-label="Liste des photographes">

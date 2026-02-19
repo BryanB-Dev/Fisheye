@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import styles from "./page.module.css";
+import SiteHeader from "../../components/SiteHeader";
 import ContactModalTrigger from "./components/ContactModalTrigger";
 import PhotographerContent from "./components/PhotographerContent";
 import StatsBar from "./components/StatsBar";
@@ -31,11 +32,12 @@ export default async function PhotographerPage({ params }) {
   return (
     <LikesProvider initialTotalLikes={totalLikes}>
       <div className={styles.page}>
-        <header className={styles.header}>
-          <Link href="/" className={styles.brand} aria-label="Retour à l'accueil">
-            FishEye
-          </Link>
-        </header>
+        <SiteHeader
+          className={styles.header}
+          brandClassName={styles.brand}
+          logoClassName={styles.brandLogo}
+          homeAriaLabel="Retour à l'accueil"
+        />
 
         <main className={styles.main}>
           <section className={styles.profile} aria-label="Profil photographe">
